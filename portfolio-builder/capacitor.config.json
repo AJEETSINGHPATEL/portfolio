@@ -1,0 +1,12 @@
+{
+    "appId": "com.portfoliobuilder.app",
+    "appName": "Portfolio Builder",
+    "webDir": "dist",
+    "bundledWebRuntime": false,
+    "android": {
+        "buildOptions": {
+            "keystorePath": "",
+            "keystoreAlias": ""
+        }
+    }
+}

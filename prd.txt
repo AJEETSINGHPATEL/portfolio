@@ -1,0 +1,358 @@
+📱 PRD – Portfolio & Resume Builder App (AntiGravity Edition)
+
+Goal: Create a fully responsive Android app using AntiGravity, where users can:
+✔ Choose from 10 portfolio templates
+✔ Choose from 10 resume templates
+✔ Fill all fields (all form types)
+✔ Preview inside the app
+✔ Save using Local Storage (AntiGravity Storage Blocks)
+✔ Export as PDF
+✔ Download PDF
+✔ Generate shareable portfolio link
+✔ Build production-level APK using AntiGravity export
+
+1. Product Overview
+
+This AntiGravity app allows users to build professional portfolios and resumes inside the mobile app, using ready-made templates.
+The app requires no backend; everything uses local storage + client-side PDF generation.
+
+2. Features Overview
+2.1 Portfolio Builder
+
+10 unique portfolio templates
+
+Input fields:
+
+Name
+
+Tagline / Title
+
+About
+
+Skills
+
+Experience list
+
+Education list
+
+Projects (with description & links)
+
+Achievements
+
+Certifications
+
+Contact details
+
+Social media links
+
+Profile image upload
+
+Live template preview
+
+Save to local database
+
+Export PDF
+
+Share link
+
+Offline mode
+
+2.2 Resume Builder
+
+10 modern resume templates
+
+All fields included:
+
+Personal details
+
+Summary
+
+Education
+
+Work Experience
+
+Skills
+
+Certifications
+
+Languages
+
+Hobbies
+
+Projects
+
+Profile image optional
+
+Preview on device
+
+Save locally
+
+Export & download PDF (production quality)
+
+2.3 Extra Features
+
+Sample / Demo portfolio for preview
+
+Onboarding instructions
+
+Data backup to file (local export)
+
+Template switching without losing data
+
+Image compression for faster PDF export
+
+Auto-save for forms
+
+3. App Screens (AntiGravity Blocks Layout)
+1. Splash Screen
+
+Logo, animation
+
+Auto-navigate to Home
+
+2. Home Dashboard
+
+Buttons:
+
+Create Portfolio
+
+Create Resume
+
+Saved Portfolios
+
+Saved Resumes
+
+Tutorial
+
+3. Template Selection Screen
+
+10 portfolio templates (grid view)
+
+10 resume templates (grid view)
+
+Preview button
+
+4. Form Input Screen
+
+Use AntiGravity form blocks:
+
+Input
+
+TextArea
+
+Checkbox
+
+Multi-Entry Repeater Fields (Experience, Skills, Projects)
+
+5. Live Preview Screen
+
+Switch template
+
+Zoom view
+
+Scrollable
+
+6. PDF Export / Download Screen
+
+Convert preview to PDF
+
+Download button
+
+Share button
+
+7. Settings
+
+Export data
+
+Import local backup
+
+Clear all data
+
+4. Technical Requirements (AntiGravity Compatible)
+Framework
+
+AntiGravity UI + Logic Blocks
+
+Optional custom JS blocks for:
+
+PDF generation
+
+Template switching
+
+Local storage enhancements
+
+Storage
+
+AntiGravity “Local Store”
+
+IndexedDB for image storage (via custom JS if needed)
+
+PDF
+
+Use html2pdf.js inside custom blocks
+or
+
+Built-in AntiGravity PDF export (if available)
+
+Image Handling
+
+Base64 encoding for storage
+
+Compression via custom JS block
+
+Share Link Function
+
+Two options:
+
+AntiGravity web publish → public URL
+
+Template rendered inside a shared HTML viewer
+
+5. APK Build – AntiGravity Workflow
+✔ APK build is completely supported.
+
+Steps:
+
+Click Export → Android APK in AntiGravity
+
+AntiGravity bundles:
+
+app assets
+
+JS
+
+templates
+
+PDF code
+
+offline storage
+
+You receive a release-ready production APK
+
+This APK can be uploaded to:
+
+Google Play
+
+Any App Store
+
+Direct share via WhatsApp / Drive
+
+6. Folder / Component Structure (AntiGravity Format)
+/App
+  /Pages
+     Splash.agpage
+     Home.agpage
+     PortfolioTemplates.agpage
+     ResumeTemplates.agpage
+     FormPage.agpage
+     Preview.agpage
+     PDFExport.agpage
+     Settings.agpage
+  /Components
+     PortfolioTemplate01.agcomp
+     PortfolioTemplate02.agcomp
+     ...
+     ResumeTemplate01.agcomp
+     ...
+  /Assets
+     images/
+     fonts/
+  /Scripts
+     pdf_export.js
+     local_store.js
+     image_compress.js
+
+7. Template Requirements
+Portfolio Templates (10)
+
+Styles:
+
+Minimal
+
+Modern
+
+Elegant
+
+Dark theme
+
+Gradient
+
+Business
+
+Animated
+
+Developer theme
+
+Designer theme
+
+Photo-heavy layout
+
+Resume Templates (10)
+
+ATS-friendly
+
+Creative
+
+Minimal
+
+Corporate
+
+Bold header
+
+Two-column
+
+Classic
+
+Technical
+
+Freshers
+
+Premium style
+
+8. User Flow
+
+User opens app
+
+Select Portfolio or Resume
+
+Choose template
+
+Fill all fields
+
+Preview live
+
+Save locally
+
+Export PDF
+
+Download or share
+
+Create APK (developer only)
+
+9. Performance Requirements
+
+Load under 1 second
+
+Preview smooth scrolling
+
+PDF under 2 MB
+
+Template switching under 300 ms
+
+No UI break on small screens
+
+10. Deliverables
+
+Full AntiGravity project
+
+Production APK
+
+Templates (20 total)
+
+PDF code
+
+Local storage integration
+
+Responsive UI
+
+Error-free JavaScript blocks
