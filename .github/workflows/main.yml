@@ -28,18 +28,20 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./
+        working-directory: ./portfolio-builder
 
       - name: Build Web Assets
         run: npm run build
+        working-directory: ./portfolio-builder
 
       - name: Sync Capacitor
         run: npx cap sync
+        working-directory: ./portfolio-builder
 
       - name: Build APK
         run: |
           ls -R
-          cd android
+          cd portfolio-builder/android
           ls -la
           chmod +x gradlew
           ./gradlew assembleDebug
@@ -48,4 +50,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-debug
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          path: portfolio-builder/android/app/build/outputs/apk/debug/app-debug.apk
