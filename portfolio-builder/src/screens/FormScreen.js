@@ -5,23 +5,23 @@ import { compressImage } from '../utils/imageCompressor.js';
 
 // ===== FORM SCREEN =====
 export async function FormScreen(container, params) {
-    const type = params.type || state.get('currentType');
-    const templateId = params.templateId || state.get('currentTemplate');
+  const type = params.type || state.get('currentType');
+  const templateId = params.templateId || state.get('currentTemplate');
 
-    // Load existing data if editing
-    let formData = {};
-    let itemId = params.itemId;
+  // Load existing data if editing
+  let formData = {};
+  let itemId = params.itemId;
 
-    if (itemId) {
-        const item = await storage.getItem(itemId);
-        if (item) {
-            formData = item.data;
-        }
+  if (itemId) {
+    const item = await storage.getItem(itemId);
+    if (item) {
+      formData = item.data;
     }
+  }
 
-    const isPortfolio = type === 'portfolio';
+  const isPortfolio = type === 'portfolio';
 
-    container.innerHTML = `
+  container.innerHTML = `
     <div class="screen">
       <div class="container">
         <!-- Header -->
@@ -203,46 +203,46 @@ export async function FormScreen(container, params) {
     </div>
   `;
 
-    // Get form element
-    const form = document.getElementById('main-form');
+  // Get form element
+  const form = document.getElementById('main-form');
 
-    // Auto-save setup
-    const autoSave = setupAutoSave(() => ({
-        id: itemId,
-        formData: getFormData()
-    }));
+  // Auto-save setup
+  const autoSave = setupAutoSave(() => ({
+    id: itemId,
+    formData: getFormData()
+  }));
 
-    form.addEventListener('input', autoSave);
+  form.addEventListener('input', autoSave);
 
-    // Profile image upload
-    document.getElementById('profile-image').addEventListener('change', async (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const compressed = await compressImage(file);
-            formData.profileImage = compressed.dataUrl;
-        }
-    });
+  // Profile image upload
+  document.getElementById('profile-image').addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const compressed = await compressImage(file);
+      formData.profileImage = compressed.dataUrl;
+    }
+  });
 
-    // Dynamic field handlers
-    document.getElementById('add-skill')?.addEventListener('click', () => {
-        const container = document.getElementById('skills-container');
-        const div = document.createElement('div');
-        div.className = 'form-group flex gap-2';
-        div.innerHTML = `
+  // Dynamic field handlers
+  document.getElementById('add-skill')?.addEventListener('click', () => {
+    const container = document.getElementById('skills-container');
+    const div = document.createElement('div');
+    div.className = 'form-group flex gap-2';
+    div.innerHTML = `
       <input type="text" class="form-input" name="skills[]" placeholder="e.g., JavaScript">
       <button type="button" class="btn btn-secondary remove-skill">Remove</button>
     `;
-        container.appendChild(div);
-        attachRemoveHandlers();
-    });
+    container.appendChild(div);
+    attachRemoveHandlers();
+  });
 
-    document.getElementById('add-experience')?.addEventListener('click', () => {
-        const container = document.getElementById('experience-container');
-        const count = container.children.length;
-        const div = document.createElement('div');
-        div.className = 'experience-item mb-3';
-        div.style.cssText = 'padding: 1rem; background: var(--bg-tertiary); border-radius: var(--radius-md);';
-        div.innerHTML = `
+  document.getElementById('add-experience')?.addEventListener('click', () => {
+    const container = document.getElementById('experience-container');
+    const count = container.children.length;
+    const div = document.createElement('div');
+    div.className = 'experience-item mb-3';
+    div.style.cssText = 'padding: 1rem; background: var(--bg-tertiary); border-radius: var(--radius-md);';
+    div.innerHTML = `
       <div class="form-group">
         <label class="form-label">Job Title</label>
         <input type="text" class="form-input" name="experience[${count}][title]" placeholder="e.g., Senior Developer">
@@ -267,17 +267,17 @@ export async function FormScreen(container, params) {
       </div>
       <button type="button" class="btn btn-secondary remove-experience">Remove Experience</button>
     `;
-        container.appendChild(div);
-        attachRemoveHandlers();
-    });
+    container.appendChild(div);
+    attachRemoveHandlers();
+  });
 
-    document.getElementById('add-education')?.addEventListener('click', () => {
-        const container = document.getElementById('education-container');
-        const count = container.children.length;
-        const div = document.createElement('div');
-        div.className = 'education-item mb-3';
-        div.style.cssText = 'padding: 1rem; background: var(--bg-tertiary); border-radius: var(--radius-md);';
-        div.innerHTML = `
+  document.getElementById('add-education')?.addEventListener('click', () => {
+    const container = document.getElementById('education-container');
+    const count = container.children.length;
+    const div = document.createElement('div');
+    div.className = 'education-item mb-3';
+    div.style.cssText = 'padding: 1rem; background: var(--bg-tertiary); border-radius: var(--radius-md);';
+    div.innerHTML = `
       <div class="form-group">
         <label class="form-label">Degree</label>
         <input type="text" class="form-input" name="education[${count}][degree]" placeholder="e.g., Bachelor of Science">
@@ -292,17 +292,17 @@ export async function FormScreen(container, params) {
       </div>
       <button type="button" class="btn btn-secondary remove-education">Remove</button>
     `;
-        container.appendChild(div);
-        attachRemoveHandlers();
-    });
+    container.appendChild(div);
+    attachRemoveHandlers();
+  });
 
-    document.getElementById('add-project')?.addEventListener('click', () => {
-        const container = document.getElementById('projects-container');
-        const count = container.children.length;
-        const div = document.createElement('div');
-        div.className = 'project-item mb-3';
-        div.style.cssText = 'padding: 1rem; background: var(--bg-tertiary); border-radius: var(--radius-md);';
-        div.innerHTML = `
+  document.getElementById('add-project')?.addEventListener('click', () => {
+    const container = document.getElementById('projects-container');
+    const count = container.children.length;
+    const div = document.createElement('div');
+    div.className = 'project-item mb-3';
+    div.style.cssText = 'padding: 1rem; background: var(--bg-tertiary); border-radius: var(--radius-md);';
+    div.innerHTML = `
       <div class="form-group">
         <label class="form-label">Project Name</label>
         <input type="text" class="form-input" name="projects[${count}][name]" placeholder="e.g., E-commerce Website">
@@ -317,113 +317,113 @@ export async function FormScreen(container, params) {
       </div>
       <button type="button" class="btn btn-secondary remove-project">Remove Project</button>
     `;
-        container.appendChild(div);
-        attachRemoveHandlers();
-    });
-
-    function attachRemoveHandlers() {
-        container.querySelectorAll('.remove-skill').forEach(btn => {
-            btn.addEventListener('click', () => btn.parentElement.remove());
-        });
-        container.querySelectorAll('.remove-experience').forEach(btn => {
-            btn.addEventListener('click', () => btn.closest('.experience-item').remove());
-        });
-        container.querySelectorAll('.remove-education').forEach(btn => {
-            btn.addEventListener('click', () => btn.closest('.education-item').remove());
-        });
-        container.querySelectorAll('.remove-project').forEach(btn => {
-            btn.addEventListener('click', () => btn.closest('.project-item').remove());
-        });
-    }
-
+    container.appendChild(div);
     attachRemoveHandlers();
+  });
 
-    // Form submission
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const data = getFormData();
-
-        if (!itemId) {
-            itemId = await storage.saveFormData(type, templateId, data);
-        } else {
-            await storage.updateItem(itemId, data);
-        }
-
-        state.update({ formData: data });
-        router.navigate('/preview', { type, templateId, itemId });
+  function attachRemoveHandlers() {
+    container.querySelectorAll('.remove-skill').forEach(btn => {
+      btn.addEventListener('click', () => btn.parentElement.remove());
     });
-
-    // Back button
-    document.getElementById('back-btn').addEventListener('click', () => {
-        router.navigate('/templates', { type });
+    container.querySelectorAll('.remove-experience').forEach(btn => {
+      btn.addEventListener('click', () => btn.closest('.experience-item').remove());
     });
-
-    // Preview button
-    document.getElementById('preview-btn').addEventListener('click', () => {
-        const data = getFormData();
-        state.update({ formData: data });
-        router.navigate('/preview', { type, templateId, itemId });
+    container.querySelectorAll('.remove-education').forEach(btn => {
+      btn.addEventListener('click', () => btn.closest('.education-item').remove());
     });
+    container.querySelectorAll('.remove-project').forEach(btn => {
+      btn.addEventListener('click', () => btn.closest('.project-item').remove());
+    });
+  }
 
-    // Helper to get form data
-    function getFormData() {
-        const formData = new FormData(form);
-        const data = {};
+  attachRemoveHandlers();
 
-        // Simple fields
-        for (const [key, value] of formData.entries()) {
-            if (!key.includes('[')) {
-                data[key] = value;
-            }
-        }
+  // Form submission
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = getFormData();
 
-        // Skills array
-        data.skills = Array.from(form.querySelectorAll('input[name="skills[]"]'))
-            .map(input => input.value)
-            .filter(v => v.trim());
-
-        // Experience array
-        data.experience = [];
-        const expItems = form.querySelectorAll('.experience-item');
-        expItems.forEach((item, i) => {
-            data.experience.push({
-                title: item.querySelector(`[name="experience[${i}][title]"]`)?.value || '',
-                company: item.querySelector(`[name="experience[${i}][company]"]`)?.value || '',
-                startDate: item.querySelector(`[name="experience[${i}][startDate]"]`)?.value || '',
-                endDate: item.querySelector(`[name="experience[${i}][endDate]"]`)?.value || '',
-                description: item.querySelector(`[name="experience[${i}][description]"]`)?.value || ''
-            });
-        });
-
-        // Education array
-        data.education = [];
-        const eduItems = form.querySelectorAll('.education-item');
-        eduItems.forEach((item, i) => {
-            data.education.push({
-                degree: item.querySelector(`[name="education[${i}][degree]"]`)?.value || '',
-                institution: item.querySelector(`[name="education[${i}][institution]"]`)?.value || '',
-                year: item.querySelector(`[name="education[${i}][year]"]`)?.value || ''
-            });
-        });
-
-        // Projects array (portfolio only)
-        if (isPortfolio) {
-            data.projects = [];
-            const projItems = form.querySelectorAll('.project-item');
-            projItems.forEach((item, i) => {
-                data.projects.push({
-                    name: item.querySelector(`[name="projects[${i}][name]"]`)?.value || '',
-                    description: item.querySelector(`[name="projects[${i}][description]"]`)?.value || '',
-                    link: item.querySelector(`[name="projects[${i}][link]"]`)?.value || ''
-                });
-            });
-        }
-
-        // Add profile image if exists
-        if (formData.profileImage) {
-            data.profileImage = formData.profileImage;
-        }
-
-        return data;
+    if (!itemId) {
+      itemId = await storage.saveFormData(type, templateId, data);
+    } else {
+      await storage.updateItem(itemId, data);
     }
+
+    state.update({ formData: data });
+    router.navigate('/preview', { type, templateId, itemId });
+  });
+
+  // Back button
+  document.getElementById('back-btn').addEventListener('click', () => {
+    router.navigate('/templates', { type });
+  });
+
+  // Preview button
+  document.getElementById('preview-btn').addEventListener('click', () => {
+    const data = getFormData();
+    state.update({ formData: data });
+    router.navigate('/preview', { type, templateId, itemId });
+  });
+
+  // Helper to get form data
+  function getFormData() {
+    const rawFormData = new FormData(form);
+    const data = {};
+
+    // Simple fields
+    for (const [key, value] of rawFormData.entries()) {
+      if (!key.includes('[')) {
+        data[key] = value;
+      }
+    }
+
+    // Skills array
+    data.skills = Array.from(form.querySelectorAll('input[name="skills[]"]'))
+      .map(input => input.value)
+      .filter(v => v.trim());
+
+    // Experience array
+    data.experience = [];
+    const expItems = form.querySelectorAll('.experience-item');
+    expItems.forEach((item, i) => {
+      data.experience.push({
+        title: item.querySelector(`[name="experience[${i}][title]"]`)?.value || '',
+        company: item.querySelector(`[name="experience[${i}][company]"]`)?.value || '',
+        startDate: item.querySelector(`[name="experience[${i}][startDate]"]`)?.value || '',
+        endDate: item.querySelector(`[name="experience[${i}][endDate]"]`)?.value || '',
+        description: item.querySelector(`[name="experience[${i}][description]"]`)?.value || ''
+      });
+    });
+
+    // Education array
+    data.education = [];
+    const eduItems = form.querySelectorAll('.education-item');
+    eduItems.forEach((item, i) => {
+      data.education.push({
+        degree: item.querySelector(`[name="education[${i}][degree]"]`)?.value || '',
+        institution: item.querySelector(`[name="education[${i}][institution]"]`)?.value || '',
+        year: item.querySelector(`[name="education[${i}][year]"]`)?.value || ''
+      });
+    });
+
+    // Projects array (portfolio only)
+    if (isPortfolio) {
+      data.projects = [];
+      const projItems = form.querySelectorAll('.project-item');
+      projItems.forEach((item, i) => {
+        data.projects.push({
+          name: item.querySelector(`[name="projects[${i}][name]"]`)?.value || '',
+          description: item.querySelector(`[name="projects[${i}][description]"]`)?.value || '',
+          link: item.querySelector(`[name="projects[${i}][link]"]`)?.value || ''
+        });
+      });
+    }
+
+    // Add profile image if exists (from outer scope)
+    if (formData.profileImage) {
+      data.profileImage = formData.profileImage;
+    }
+
+    return data;
+  }
 }

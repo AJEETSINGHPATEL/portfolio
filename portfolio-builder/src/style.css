@@ -395,3 +395,24 @@ p {
     display: none !important;
   }
 }
+
+/* Toggle Switch */
+.toggle-checkbox {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: var(--primary);
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  background: var(--bg-color);
+  z-index: 100;
+  padding: 1rem 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.preview-wrapper {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
